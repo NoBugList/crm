@@ -25,8 +25,12 @@ public class SaleChanceController extends BaseController {
 	private SaleChanceService saleChanceService;
 	
 	@RequestMapping("index")
-	public String index() {
-		return "sale_chance";
+	public String index(Integer state) {
+		if (state == null) {
+			return "sale_chance";			
+		}else {
+			return "sale_chance_assignment";
+		}
 	}
 			
 	@RequestMapping("list")
