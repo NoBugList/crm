@@ -18,7 +18,7 @@ function openModifyDialog() {
 function saveRole() {
 	
 	var id = $("#id").val();
-	var url = "add";
+	var url = "addRole";
 	if (id != null && $.trim(id).length >0 && !isNaN(id)) { // 确定id是数字
 		url = "update";
 	}
