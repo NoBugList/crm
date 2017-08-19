@@ -10,4 +10,6 @@ public class Constant {
 	
 	public static final String SUCCESS_MESSAGE = "操作成功。";
 	
+	public static final String USER_PERMISSION_SESSION_KEY = "permissions";
+	
 }

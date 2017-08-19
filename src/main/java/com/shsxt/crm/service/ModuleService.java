@@ -18,6 +18,7 @@ import com.shsxt.crm.dao.ModuleDao;
 import com.shsxt.crm.exception.ParamException;
 import com.shsxt.crm.model.Module;
 import com.shsxt.crm.util.AssertUtil;
+import com.shsxt.crm.vo.ModuleVO;
 
 @Service
 public class ModuleService {
@@ -163,6 +164,38 @@ public class ModuleService {
 		}
 		List <Module> modules = moduleDao.findByGrade(grade);
 		return modules;
+	}
+
+	/**
+	 * 查询所有的模块
+	 * @param grade
+	 * @return
+	 */
+	public List<ModuleVO> findAll(Integer roleId) {
+		List<ModuleVO> modules = moduleDao.findAll();
+		List<Integer> roleModuleIds = moduleDao.findByRoleId(roleId);
+		if (roleModuleIds == null || roleModuleIds.size() < 1) {
+			return modules;
+		}
+		for (ModuleVO moduleVO : modules) {
+			if (!roleModuleIds.contains(moduleVO.getId())) {
+				continue;
+			}
+			moduleVO.setChecked(true);
+		}
+		return modules;
+	}
+
+	/**
+	 * 根据ID查询数据
+	 * @param id
+	 * @return
+	 */
+	public Module findById(Integer id) {
+		AssertUtil.intIsNotEmpty(id, "请选择模块");
+		Module module = moduleDao.findById(id);
+		AssertUtil.notNull(module, "此模块不存在，请重新选择");
+		return module;
 	}
 
 }

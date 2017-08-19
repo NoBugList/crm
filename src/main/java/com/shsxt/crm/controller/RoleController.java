@@ -1,6 +1,7 @@
 package com.shsxt.crm.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.shsxt.crm.base.BaseController;
 import com.shsxt.crm.base.BaseQuery;
 import com.shsxt.crm.base.ResultInfo;
+import com.shsxt.crm.model.Role;
 import com.shsxt.crm.service.RoleService;
 
 @Controller
@@ -45,11 +47,20 @@ public class RoleController extends BaseController{
 		roleService.update(id,roleName,roleRemark);
 		return success("更新成功");	
 	}
+	
 	@RequestMapping("delete")
 	@ResponseBody
 	public ResultInfo delete(String ids) {
 		roleService.delete(ids);
 		return success("删除成功");	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping("find_all")
+	@ResponseBody
+	public List<Role> findAllList() {
+		Map<String, Object> result = roleService.findAll();
+		return (List<Role>) result.get("rows");
 	}
 
 }

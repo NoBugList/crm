@@ -69,6 +69,7 @@
     				return;
     			}
     			$.post("${ctx}/user/login", {userName:userName, userPwd:password}, function(resp) {
+    			
     				if (resp.resultCode == 0) {
     					alert(resp.resultMessage);
     				} else {

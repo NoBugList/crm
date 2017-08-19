@@ -10,6 +10,7 @@
 		    <tr>
 		        <th field="cb" checkbox="true" align="center"></th>
 		        <th field="id" width="50" align="center">编号</th>
+		        <th field="parent" width="200" align="center" formatter="formatParentName">父模块名称</th>
 		        <th field="moduleName" width="200" align="center">模块名称</th>
 		        <th field="moduleStyle" width="50" align="center">模块样式</th>
 		        <th field="url" width="100" align="center">路径/方法</th>

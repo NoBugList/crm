@@ -1,10 +1,13 @@
 package com.shsxt.crm.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.shsxt.crm.base.BaseModel;
+import com.shsxt.crm.vo.RoleVO;
 
-public class User {
+public class User extends BaseModel {
 	
 	private Integer id;
 	private String userName;
@@ -18,6 +21,21 @@ public class User {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
 	private Date updateDate;
 	
+	private List<RoleVO> roles;
+	private List<Integer> roleIds;
+	
+	public List<RoleVO> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<RoleVO> roles) {
+		this.roles = roles;
+	}
+	public List<Integer> getRoleIds() {
+		return roleIds;
+	}
+	public void setRoleIds(List<Integer> roleIds) {
+		this.roleIds = roleIds;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -12,6 +12,11 @@ function openTab(text, url, iconCls){
     }
 }
 
+function formatParentName(value) {
+	console.log(value);
+	return value.moduleName;
+}
+
 function openPasswordModifyDialog(){
     $("#dlg").dialog("open").dialog("setTitle","修改密码");
 }

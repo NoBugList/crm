@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.crm.dao.DataDicDao">
+    
+    <sql id="DataDic_Columns">
+        id, data_dic_name, data_dic_value, is_valid, create_date, update_date
+    </sql>
+
+    <select id="loadById" resultType="DataDic" >
+        SELECT <include refid="DataDic_Columns" /> FROM
+        t_datadic WHERE id = #{id} and is_Valid = 1
+    </select>
+
+    <select id="selectForPage" resultType="DataDic" >
+        SELECT <include refid="DataDic_Columns" /> FROM
+        t_datadic
+        <where>
+            is_Valid = 1
+            <if test="@Ognl@isNotEmpty(dataDicName)" >
+                AND data_dic_name LIKE '%${dataDicName}%'
+            </if>
+            <if test="@Ognl@isNotEmpty(dataDicValue)" >
+                AND data_dic_value LIKE '%${dataDicValue}%'
+            </if>
+        </where>
+    </select>
+
+    <select id="findAll" resultType="DataDic" >
+        select distinct data_dic_name
+        from t_dataDic
+        WHERE
+            is_valid = 1
+    </select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" >
+	    insert into t_datadic (
+	   		data_dic_name, data_dic_value, is_valid, create_date, update_date
+	    ) values (
+	    	 #{dataDicName}, #{dataDicValue}, 1, now(), now()
+	    )
+	</insert>
+	
+	<update id="update" >
+		update 
+			t_datadic
+        <set>
+            <if test="@Ognl@isNotEmpty(dataDicName)">
+                data_dic_name = #{dataDicName},
+            </if>
+            <if test="@Ognl@isNotEmpty(dataDicValue)">
+                data_dic_value = #{dataDicValue},
+            </if>
+            update_date = now()
+        </set>
+		where 
+			id = #{id} 
+	</update>
+	
+	<update id="delete" >
+		update 
+			t_datadic
+		set 
+			is_valid = 0, update_date = now()
+		where 
+			id = #{id} 
+	</update>
+
+    <update id="deleteBatch" >
+        update
+          t_datadic
+        set
+          is_valid = 0, update_date = now()
+        where
+          id in (${ids})
+    </update>
+	
+</mapper> 

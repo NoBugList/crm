@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.crm.dao.UserRoleDao">
+	
+	
+	
+	<insert id="insertBatch">
+        insert into t_user_role (role_id, user_id, is_valid, create_date, update_date) values
+        <foreach collection="list" item="userRole" separator="," >
+        	(#{userRole.roleId}, #{userRole.userId}, 1, now(), now())
+        </foreach>
+    </insert>
+	
+</mapper>

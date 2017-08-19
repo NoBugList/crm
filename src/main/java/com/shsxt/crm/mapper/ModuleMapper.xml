@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shsxt.crm.dao.ModuleDao">
+
+	<sql id="Module_Columns">
+		id, module_name, module_style, url, parent_id, grade, orders, tree_path,
+		create_date, update_date, is_valid, opt_value
+	</sql>
+
+	<resultMap type="Module" id="RM_Module">
+		<id property="id" column="id" />
+		<result property="moduleName" column="module_name" />
+		<result property="moduleStyle" column="module_style" />
+		<result property="url" column="url" />
+		<result property="parentId" column="parent_id" />
+		<result property="grade" column="grade" />
+		<result property="orders" column="orders" />
+		<result property="treePath" column="tree_path" />
+		<result property="createDate" column="create_date" />
+		<result property="updateDate" column="update_date" />
+		<result property="isValid" column="is_valid" />
+		<result property="optValue" column="opt_value" />
+		<association property="parent" javaType="Module">
+			<id property="id" column="pid" />
+			<result property="moduleName" column="p_module_name" />
+		</association>
+	</resultMap>
+
+	<select id="selectForPage" resultMap="RM_Module">
+		select t1.id, t1.module_name, t1.module_style, t1.url, t1.parent_id,
+		t1.grade, t1.orders, t1.tree_path,
+		t1.create_date, t1.update_date, t1.is_valid, t1.opt_value, t2.id as pid,
+		t2.module_name as p_module_name
+		from t_module t1 join t_module t2 on t1.parent_id = t2.id
+		<where>
+			t1.is_valid = 1
+		</where>
+		order by id
+	</select>
+
+
+
+
+</mapper>

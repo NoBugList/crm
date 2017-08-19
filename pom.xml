@@ -203,7 +203,7 @@
                 <webAppConfig>
                     <!--<contextPath>/crm</contextPath>-->
                     <!-- 此处指定默认Jetty Web配置文件 -->
-                    <!-- <defaultsDescriptor>src/main/resources/webdefault.xml</defaultsDescriptor> -->
+                     <defaultsDescriptor>jetty/webdefault.xml</defaultsDescriptor>
                 </webAppConfig>
             </configuration>
 		</plugin>

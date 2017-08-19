@@ -1,6 +1,7 @@
 package com.shsxt.crm.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,12 @@ public class RoleService {
 		Role role = roleDao.findById(roleId);
 		AssertUtil.notNull(role, "该角色不存在");
 		return role;
+	}
+
+	public Map<String, Object> findAll() {
+		List<Role> roles = roleDao.findAll();
+		Map<String, Object> result = new HashMap<>();
+		result.put("rows", roles);
+		return result;
 	}
 }
